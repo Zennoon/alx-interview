@@ -1,4 +1,23 @@
+#!/usr/bin/python3
+"""
+Contains:
+    Functions
+    =========
+    pascal_triangle - Accepts a single integer n, and generates the first n rows
+    of Pascal's Triangle
+"""
+
 def pascal_triangle(n):
+    """
+    Accepts a single integer n, and generates the first n rows
+    of Pascal's Triangle
+    
+    Args:
+        n (int): The number of rows of the triangle to generate
+
+    Returns:
+        list: A list of the first n rows of the triangle
+    """
     if n <= 0:
         return ([])
     triangle = [[1]]
