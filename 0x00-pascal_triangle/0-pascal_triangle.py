@@ -3,15 +3,16 @@
 Contains:
     Functions
     =========
-    pascal_triangle - Accepts a single integer n, and generates the first n rows
-    of Pascal's Triangle
+    pascal_triangle - Accepts a single integer n, and generates the first
+    n rows of Pascal's Triangle
 """
+
 
 def pascal_triangle(n):
     """
     Accepts a single integer n, and generates the first n rows
     of Pascal's Triangle
-    
+
     Args:
         n (int): The number of rows of the triangle to generate
 
