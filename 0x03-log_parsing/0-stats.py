@@ -20,13 +20,7 @@ def validate_line(line):
     """
     Checks that the line is of the correct format
     """
-    pattern = "{}{}{}{}".format(
-        r"^\S+ \- ",
-        r"\[\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+\] ",
-        r'"[^"]+" ',
-        r"(\S+) (\d+)$"
-    )
-    fp = (
+    pattern = (
         r'\s*(?P<ip>\S+)\s*',
         r'\s*\[(?P<date>\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+)\]',
         r'\s*"(?P<request>[^"]*)"\s*',
@@ -34,9 +28,10 @@ def validate_line(line):
         r'\s*(?P<file_size>\d+)'
     )
     info = None
-    log_fmt = '{}\\-{}{}{}{}\\s*'.format(fp[0], fp[1], fp[2], fp[3], fp[4])
-    matched = re.fullmatch(log_fmt, line.strip())
-    matched = re.fullmatch(pattern, line.strip())
+    formt = '{}\\-{}{}{}{}\\s*'.format(
+        pattern[0], pattern[1], pattern[2], pattern[3], pattern[4]
+    )
+    matched = re.fullmatch(formt, line.strip())
     if matched:
         splitted = line.split()
         info = [
