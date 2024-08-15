@@ -21,11 +21,11 @@ def validate_line(line):
     Checks that the line is of the correct format
     """
     pattern = (
-        r'\s*(?P<ip>\S+)\s*',
-        r'\s*\[(?P<date>\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+)\]',
-        r'\s*"(?P<request>[^"]*)"\s*',
-        r'\s*(?P<status_code>\S+)',
-        r'\s*(?P<file_size>\d+)'
+        r'\s*\S+\s*',
+        r'\s*\[\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+\]',
+        r'\s*"[^"]*"\s*',
+        r'\s*(\S+)',
+        r'\s*(\d+)'
     )
     info = None
     formt = '{}\\-{}{}{}{}\\s*'.format(
