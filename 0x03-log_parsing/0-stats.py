@@ -43,20 +43,21 @@ def validate_line(line):
     return pattern.match(line)
 
 
-for line in sys.stdin:
-    # counter += 1
-    matched = validate_line(line.strip())
-    if matched:
-        counter += 1
-        stat, f_size = matched[1], matched[2]
-        try:
-            if stat in status_log:
-                status_log[int(stat)] += 1
+while True:
+    for line in sys.stdin:
+        # counter += 1
+        matched = validate_line(line.strip())
+        if matched:
+            counter += 1
+            stat, f_size = matched[1], matched[2]
+            try:
+                if stat in status_log:
+                    status_log[int(stat)] += 1
+                else:
+                    status_log[int(stat)] = 1
+            except Exception:
+                pass
             else:
-                status_log[int(stat)] = 1
-        except Exception:
-            pass
-        else:
-            total_f_size += int(f_size)
-        if counter % 10 == 0:
-            print_stats()
+                total_f_size += int(f_size)
+            if counter % 10 == 0:
+                print_stats()
