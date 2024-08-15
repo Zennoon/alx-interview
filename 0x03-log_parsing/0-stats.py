@@ -16,11 +16,26 @@ def print_stats(total_f_size, status_log):
         print("{}: {:d}".format(stat_code, freq), flush=True)
 
 
-def validate_line(line, pattern):
+def validate_line(line):
     """
     Checks that the line is of the correct format
     """
-    return pattern.match(line)
+    fp = (
+        r'\s*(?P<ip>\S+)\s*',
+        r'\s*\[(?P<date>\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+)\]',
+        r'\s*"(?P<request>[^"]*)"\s*',
+        r'\s*(?P<status_code>\S+)',
+        r'\s*(?P<file_size>\d+)'
+    )
+    info = None
+    log_fmt = '{}\\-{}{}{}{}\\s*'.format(fp[0], fp[1], fp[2], fp[3], fp[4])
+    matched = re.fullmatch(log_fmt, line)
+    if matched:
+        info = [
+            matched.group("status_code"),
+            matched.group("file_size")
+        ]
+    return info
 
 
 def run():
@@ -28,29 +43,23 @@ def run():
     counter = 0
     status_log = dict()
     total_f_size = 0
-    pattern = re.compile(
-        r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} - \[.*\] "
-        + r"\"GET /projects/260 HTTP/1.1\" ([0-9]{3}) ([0-9]+)"
+    possible_codes = (
+        '200', '301', '400', '401', '403', '404', '405', '500'
     )
-    possible_codes = ('200', '301', '400', '401', '403', '404', '405', '500')
 
     try:
         while True:
             line = input()
             counter += 1
-            matched = validate_line(line.strip(), pattern)
+            matched = validate_line(line)
             if matched:
-                stat, f_size = matched[1], matched[2]
-                try:
-                    if stat in possible_codes:
-                        if stat in status_log:
-                            status_log[stat] += 1
-                        else:
-                            status_log[stat] = 1
-                except Exception:
-                    pass
-                else:
-                    total_f_size += int(f_size)
+                stat, f_size = matched
+                if stat in possible_codes:
+                    if stat in status_log:
+                        status_log[stat] += 1
+                    else:
+                        status_log[stat] = 1
+                total_f_size += int(f_size)
                 if counter % 10 == 0:
                     print_stats(total_f_size, status_log)
     except (KeyboardInterrupt, EOFError):
