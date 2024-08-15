@@ -28,9 +28,7 @@ def validate_line(line):
         r'\s*(\d+)'
     )
     info = None
-    formt = '{}\\-{}{}{}{}\\s*'.format(
-        pattern[0], pattern[1], pattern[2], pattern[3], pattern[4]
-    )
+    formt = '{}\\-{}{}{}{}\\s*'.format(*pattern)
     matched = re.fullmatch(formt, line.strip())
     if matched:
         splitted = line.split()
