@@ -14,6 +14,7 @@ import sys
 def handler(signum, frame):
     """Handles CTRL+C interruption"""
     print_stats()
+    raise KeyboardInterrupt()
 
 
 signal.signal(signal.SIGINT, handler)
