@@ -13,7 +13,7 @@ def print_stats(total_f_size, status_log):
     """Displays info about stats recorded until calling time"""
     print("File size: {}".format(total_f_size), flush=True)
     for stat_code, freq in sorted([*status_log.items()]):
-        print("{}: {}".format(stat_code, freq), flush=True)
+        print("{}: {:d}".format(stat_code, freq), flush=True)
 
 
 def validate_line(line, pattern):
