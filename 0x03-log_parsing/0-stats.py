@@ -49,10 +49,14 @@ for line in sys.stdin:
     if matched:
         counter += 1
         stat, f_size = matched[1], matched[2]
-        if stat in status_log:
-            status_log[stat] += 1
+        try:
+            if stat in status_log:
+                status_log[int(stat)] += 1
+            else:
+                status_log[int(stat)] = 1
+        except Exception:
+            pass
         else:
-            status_log[stat] = 1
-        total_f_size += int(f_size)
+            total_f_size += int(f_size)
         if counter % 10 == 0:
             print_stats()
