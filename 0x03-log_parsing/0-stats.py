@@ -21,7 +21,7 @@ def validate_line(line):
     Checks that the line is of the correct format
     """
     pattern = "{}{}{}{}".format(
-        r"^\s* \- ",
+        r"^\S+ \- ",
         r"\[\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+\] ",
         r'"[^"]+" ',
         r"(\S+) (\d+)$"
