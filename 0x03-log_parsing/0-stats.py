@@ -14,14 +14,15 @@ import sys
 def handler(signum, frame):
     print_stats()
 
+
 signal.signal(signal.SIGINT, handler)
 
 counter = 0
 status_log = dict()
 total_f_size = 0
 pattern = re.compile(
-    "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} - \[.*\] "
-    + "\"GET /projects/260 HTTP/1.1\" ([0-9]{3}) ([0-9]+)"
+    r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} - \[.*\] "
+    + r"\"GET /projects/260 HTTP/1.1\" ([0-9]{3}) ([0-9]+)"
 )
 
 
@@ -30,11 +31,13 @@ def print_stats():
     for stat_code, freq in sorted([*status_log.items()]):
         print("{}: {}".format(stat_code, freq))
 
+
 def validate_line(line):
     """
     Checks that the line is of the correct format
     """
     return pattern.match(line)
+
 
 if __name__ == "__main__":
     for line in sys.stdin:
