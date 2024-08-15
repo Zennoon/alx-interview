@@ -29,9 +29,10 @@ pattern = re.compile(
 
 def print_stats():
     """Displays info about stats recorded until calling time"""
-    print("File size: {}".format(total_f_size))
+    sys.stdout.write("File size: {}\n".format(total_f_size))
     for stat_code, freq in sorted([*status_log.items()]):
-        print("{}: {}".format(stat_code, freq))
+        sys.stdout.write("{}: {}\n".format(stat_code, freq))
+    sys.stdout.flush()
 
 
 def validate_line(line):
