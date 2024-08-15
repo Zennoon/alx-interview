@@ -20,7 +20,7 @@ def validate_line(line):
     """
     Checks that the line is of the correct format
     """
-    pattern = re.compile(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} \- "
+    pattern = re.compile(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - "
                          + r"\[\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+\] "
                          + r'\"[^"]+\" '
                          + r"(\S+) (\d+)$")
@@ -33,7 +33,7 @@ def validate_line(line):
     )
     info = None
     log_fmt = '{}\\-{}{}{}{}\\s*'.format(fp[0], fp[1], fp[2], fp[3], fp[4])
-    matched = re.fullmatch(log_fmt, line)
+    matched = re.fullmatch(log_fmt, line.strip())
     matched = pattern.match(line)
     if matched:
         info = [
