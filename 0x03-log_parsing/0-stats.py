@@ -12,6 +12,7 @@ import sys
 
 
 def handler(signum, frame):
+    """Handles CTRL+C interruption"""
     print_stats()
 
 
@@ -27,6 +28,7 @@ pattern = re.compile(
 
 
 def print_stats():
+    """Displays info about stats recorded until calling time"""
     print("File size: {}".format(total_f_size))
     for stat_code, freq in sorted([*status_log.items()]):
         print("{}: {}".format(stat_code, freq))
