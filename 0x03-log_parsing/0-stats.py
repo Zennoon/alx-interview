@@ -38,9 +38,10 @@ def validate_line(line):
     matched = re.fullmatch(log_fmt, line.strip())
     matched = re.fullmatch(pattern, line.strip())
     if matched:
+        splitted = line.split()
         info = [
-            matched[1],
-            matched[2]
+            splitted[-2],
+            splitted[-1]
         ]
     return info
 
