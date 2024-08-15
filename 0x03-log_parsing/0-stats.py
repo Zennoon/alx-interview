@@ -11,25 +11,7 @@ import signal
 import sys
 
 
-def handler(signum, frame):
-    """Handles CTRL+C interruption"""
-    print_stats()
-    raise KeyboardInterrupt()
-
-
-signal.signal(signal.SIGINT, handler)
-
-counter = 0
-status_log = dict()
-total_f_size = 0
-pattern = re.compile(
-    r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} - \[.*\] "
-    + r"\"GET /projects/260 HTTP/1.1\" ([0-9]{3}) ([0-9]+)"
-)
-possible_codes = ('200', '301', '400', '401', '403', '404', '405', '500')
-
-
-def print_stats():
+def print_stats(total_f_size, status_log):
     """Displays info about stats recorded until calling time"""
     print("File size: {}".format(total_f_size), flush=True)
     sys.stdout.flush()
@@ -37,18 +19,34 @@ def print_stats():
         print("{}: {}".format(stat_code, freq), flush=True)
 
 
-def validate_line(line):
+def validate_line(line, pattern):
     """
     Checks that the line is of the correct format
     """
     return pattern.match(line)
 
 
-if __name__ == "__main__":
+def run():
+    """Main function"""
+    counter = 0
+    status_log = dict()
+    total_f_size = 0
+    pattern = re.compile(
+        r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} - \[.*\] "
+        + r"\"GET /projects/260 HTTP/1.1\" ([0-9]{3}) ([0-9]+)"
+    )
+    possible_codes = ('200', '301', '400', '401', '403', '404', '405', '500')
+    def handler(signum, frame):
+        """Handles CTRL+C interruption"""
+        print_stats(total_f_size, status_log)
+        raise KeyboardInterrupt()
+
+
+    signal.signal(signal.SIGINT, handler)
     while True:
         line = input()
         counter += 1
-        matched = validate_line(line.strip())
+        matched = validate_line(line.strip(), pattern)
         if matched:
             stat, f_size = matched[1], matched[2]
             try:
@@ -62,4 +60,8 @@ if __name__ == "__main__":
             else:
                 total_f_size += int(f_size)
         if counter % 10 == 0:
-            print_stats()
+            print_stats(total_f_size, status_log)
+
+
+if __name__ == "__main__":
+    run()
