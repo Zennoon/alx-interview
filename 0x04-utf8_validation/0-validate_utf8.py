@@ -17,7 +17,7 @@ def convert_to_binary(num: int) -> str:
     return ("0" * (8 - len(binary))) + binary
 
 
-def construct_binary_representation(data: List[int]) -> str:
+def construct_binary_representation(data: List[int]) -> List[str]:
     """
     Receives a list of integers and returns a list
     of the binary representation of each integer in the list
@@ -33,7 +33,7 @@ def validate_bytes(bytes_list: List[str]):
     bool_list = [repr.startswith("10") for repr in bytes_list]
     return all(bool_list)
 
-
+ 
 def validUTF8(data: List[int]) -> bool:
     """
     Receives a list of integers and checks if
