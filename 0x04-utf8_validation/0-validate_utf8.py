@@ -33,7 +33,7 @@ def validate_bytes(bytes_list: List[str]):
     bool_list = [repr.startswith("10") for repr in bytes_list]
     return all(bool_list)
 
- 
+
 def validUTF8(data: List[int]) -> bool:
     """
     Receives a list of integers and checks if
