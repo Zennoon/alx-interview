@@ -9,7 +9,7 @@ Contains:
 from typing import List
 
 
-def convert_to_binary(num: int) -> str:
+def convert_to_binary(num):
     """Converts given integer to binary"""
     binary = bin(num)[2:]
     if len(binary) > 8:
@@ -17,7 +17,7 @@ def convert_to_binary(num: int) -> str:
     return ("0" * (8 - len(binary))) + binary
 
 
-def construct_binary_representation(data: List[int]) -> List[str]:
+def construct_binary_representation(data):
     """
     Receives a list of integers and returns a list
     of the binary representation of each integer in the list
@@ -25,7 +25,7 @@ def construct_binary_representation(data: List[int]) -> List[str]:
     return [convert_to_binary(num) for num in data]
 
 
-def validate_bytes(bytes_list: List[str]):
+def validate_bytes(bytes_list):
     """
     Validates that a sequence of bytes is valid utf-8
     encoding
@@ -34,7 +34,7 @@ def validate_bytes(bytes_list: List[str]):
     return all(bool_list)
 
 
-def validUTF8(data: List[int]) -> bool:
+def validUTF8(data):
     """
     Receives a list of integers and checks if
     the list represents a valid utf-8 encoding or not.
