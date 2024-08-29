@@ -50,9 +50,9 @@ def find_solutions(recur, lst, column, i, n):
                 diagonal = 0
                 for k in range(2, i + 1):
                     if ([i - k, j - k] in recur) or ([i - k, j + k] in recur):
-                        diagonals = 1
+                        diagonal = 1
                         break
-                if diagonals:
+                if diagonal:
                     continue
             recur.append([i, j])
             column.append(j)
