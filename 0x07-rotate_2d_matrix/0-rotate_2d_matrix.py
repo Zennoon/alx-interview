@@ -9,7 +9,7 @@ ___________       ___________
 """
 
 
-def rotate_matrix(matrix):
+def rotate_2d_matrix(matrix):
     """Rotates matrix 90 degrees"""
     n = len(matrix)
     k = 0
@@ -30,4 +30,3 @@ def rotate_matrix(matrix):
                 carrier = tmp
         n -= 2
         k += 1
-    return matrix
