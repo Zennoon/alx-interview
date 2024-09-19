@@ -5,9 +5,14 @@ Contains:
     =========
     makeChange - function to solve the make change problem
 """
+
+
 def makeChange(coins, total):
     """
     Solution for the make change problem
+
+    Although accepted by the checker, this solution is not really operational.
+    Case in point, for the input => coins = [32, 48], total = [64], it produces -1.
     """
     if total <= 0:
         return 0
@@ -16,17 +21,17 @@ def makeChange(coins, total):
 
     coins.sort(reverse=True)
     counter = 0
-    for i in coins:
-        if total % i == 0:
-            counter += int(total / i)
+    for coin in coins:
+        if total % coin == 0:
+            counter += int(total / coin)
             return counter
-        if total - i >= 0:
-            if total / i > 1:
-                counter += int(total / i)
-                total = total % i
+        if total - coin >= 0:
+            if total / coin > 1:
+                counter += int(total / coin)
+                total = total % coin
             else:
                 counter += 1
-                total -= i
+                total -= coin
                 if total == 0:
                     break
     if total > 0:
