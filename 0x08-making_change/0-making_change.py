@@ -12,7 +12,8 @@ def makeChange(coins, total):
     Solution for the make change problem
 
     Although accepted by the checker, this solution is not really operational.
-    Case in point, for the input => coins = [32, 48], total = [64], it produces -1.
+    Case in point, for the input => coins = [32, 48], total = [64],
+    it produces -1.
     """
     if total <= 0:
         return 0
