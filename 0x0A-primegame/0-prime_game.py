@@ -9,14 +9,13 @@ def find_primes(num):
     """Find the prime numbers less than or equal to n
     using the sieve of Eratosthenes"""
     prime = []
-    sieve = [True] * (num + 1)
+    sieve = [True for i in range(num + 1)]
     for p in range(2, num + 1):
         if (sieve[p]):
             prime.append(p)
             for i in range(p, num + 1, p):
                 sieve[i] = False
     return prime
-
 
 
 def isWinner(x, nums):
