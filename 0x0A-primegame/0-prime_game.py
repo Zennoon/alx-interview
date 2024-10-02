@@ -23,6 +23,8 @@ def find_primes(num):
 
 def isWinner(x, nums):
     """Determines the collective winner of  x rounds of prime game"""
+    if x is None or nums is None or x == 0 or nums == []:
+        return None
     score = {
         "Maria": 0,
         "Ben": 0
@@ -31,5 +33,6 @@ def isWinner(x, nums):
         num = nums[i]
         primes = find_primes(num)
         score['Maria' if len(primes) % 2 else 'Ben'] += 1
+        print(score)
     return ("Maria" if score["Maria"] > score["Ben"]
             else ("Ben" if score["Ben"] > score["Maria"] else None))
