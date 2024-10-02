@@ -5,19 +5,20 @@ Contains:
 """
 
 
-def find_primes(n):
-    """Return list of prime numbers between 1 and n inclusive
-       Args:
-        n (int): upper boundary of range. lower boundary is always 1
-    """
-    prime = []
-    sieve = [True] * (n + 1)
-    for p in range(2, n + 1):
-        if (sieve[p]):
-            prime.append(p)
-            for i in range(p, n + 1, p):
-                sieve[i] = False
-    return prime
+def find_primes(num):
+    """Find the prime numbers less than or equal to n
+    using the sieve of Eratosthenes"""
+    candidates = [i for i in range(2, num + 1)]
+    i = 0
+    while i < len(candidates):
+        focal = candidates[i]
+        j = 2
+        while (focal * j <= candidates[-1]):
+            if ((focal * j) in candidates):
+                candidates.remove(focal * j)
+            j += 1
+        i += 1
+    return candidates
 
 
 def isWinner(x, nums):
