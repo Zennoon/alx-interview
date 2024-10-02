@@ -8,17 +8,15 @@ Contains:
 def find_primes(num):
     """Find the prime numbers less than or equal to n
     using the sieve of Eratosthenes"""
-    primes = []
-    sieve = [True for i in range(num + 1)]
+    prime = []
+    sieve = [True] * (num + 1)
+    for p in range(2, num + 1):
+        if (sieve[p]):
+            prime.append(p)
+            for i in range(p, num + 1, p):
+                sieve[i] = False
+    return prime
 
-    for i in range(2, num + 1):
-        if (sieve[i]):
-            primes.append(i)
-            j = 2
-            while i * j < num + 1:
-                sieve[i * j] = False
-                j += 1
-    return primes
 
 
 def isWinner(x, nums):
