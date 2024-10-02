@@ -33,6 +33,5 @@ def isWinner(x, nums):
         num = nums[i]
         primes = find_primes(num)
         score['Maria' if len(primes) % 2 else 'Ben'] += 1
-        print(score)
     return ("Maria" if score["Maria"] > score["Ben"]
             else ("Ben" if score["Ben"] > score["Maria"] else None))
