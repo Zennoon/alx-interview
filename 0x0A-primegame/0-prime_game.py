@@ -13,8 +13,10 @@ def find_primes(num):
     for i in range(2, num + 1):
         if (sieve[i]):
             prime.append(i)
-            for j in range(i, num + 1, i):
-                sieve[j] = False
+            j = 2
+            while i * j <= num:
+                sieve[i * j] = False
+                j += 1
     return prime
 
 
