@@ -6,6 +6,8 @@ Contains:
 
 
 def find_primes(num):
+    """Find the prime numbers less than or equal to n
+    using the sieve of Eratosthenes"""
     candidates = [i for i in range(2, num + 1)]
     i = 0
     while i < len(candidates):
@@ -20,6 +22,7 @@ def find_primes(num):
 
 
 def isWinner(x, nums):
+    """Determines the collective winner of  x rounds of prime game"""
     score = {
         "Maria": 0,
         "Ben": 0
