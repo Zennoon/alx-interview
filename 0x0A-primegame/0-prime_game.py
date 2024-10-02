@@ -10,11 +10,11 @@ def find_primes(num):
     using the sieve of Eratosthenes"""
     prime = []
     sieve = [True for i in range(num + 1)]
-    for p in range(2, num + 1):
-        if (sieve[p]):
-            prime.append(p)
-            for i in range(p, num + 1, p):
-                sieve[i] = False
+    for i in range(2, num + 1):
+        if (sieve[i]):
+            prime.append(i)
+            for j in range(i, num + 1, i):
+                sieve[j] = False
     return prime
 
 
